@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const bodyParser = require('body-parser');
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
@@ -31,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 	// If the route is not recognized
 	const path = require('path');
 	app.get('*', (req, res) => {
-		res.sendFile(path.resolve(__dirname, 'client', 'build', 'iindex.html'));
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
 }
 

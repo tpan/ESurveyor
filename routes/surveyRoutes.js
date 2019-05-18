@@ -9,8 +9,17 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 
 const Survey = mongoose.model('surveys')
 //TODO add custom redirect url/thanks page depending on given url; Depending on feedback?
+//Blacklist Recipients sub document model. In mongoose Object T/F, string are equivalent
+
 module.exports = app => {
-	app.get('/api/surveys/thanks', (req, res) => {
+	app.get('/api/surveys', async (req, res) => {
+		const surveys = await Survey.find({ _user: req.user.id }).select({
+			recipients: false,
+		})
+		res.send(surveys)
+	})
+
+	app.get('/api/surveys/:surveyId/:choice', (req, res) => {
 		res.send('Thanks for your feedback!')
 	})
 
@@ -38,6 +47,7 @@ module.exports = app => {
 					{
 						$inc: { [choice]: 1 },
 						$set: { 'recipients.$.responded': true },
+						lastResponded: new Date(),
 					},
 				).exec()
 			})

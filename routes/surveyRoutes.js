@@ -23,6 +23,12 @@ module.exports = app => {
 		res.send('Thanks for your feedback!')
 	})
 
+	app.delete('/api/surveys/:surveyId', (req, res) => {
+		// console.log(req)
+		const p = new Path('/api/surveys/:surveyId')
+		console.log(req.body)
+	})
+
 	//Destructure event, url and email.
 	app.post('/api/surveys/webhooks', (req, res) => {
 		const p = new Path('/api/surveys/:surveyId/:choice')

@@ -23,10 +23,14 @@ module.exports = app => {
 		res.send('Thanks for your feedback!')
 	})
 
-	app.delete('/api/surveys/:surveyId', (req, res) => {
-		// console.log(req)
-		const p = new Path('/api/surveys/:surveyId')
-		console.log(req.body)
+	app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+		Survey.findByIdAndRemove(req.params.surveyId, (err, survey) => {
+			if (err) {
+				console.log(err)
+				return res.json({ success: false })
+			}
+			return res.json({ success: true, status: 200, id: survey._id })
+		})
 	})
 
 	//Destructure event, url and email.

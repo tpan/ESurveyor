@@ -6,7 +6,7 @@ export default function(state = [], action) {
 		case FETCH_SURVEYS:
 			return action.payload
 		case DELETE_SURVEY:
-			return action.payload
+			return state.filter(survey => survey._id !== action.payload)
 		default:
 			return state
 	}

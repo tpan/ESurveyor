@@ -7,13 +7,8 @@ class SurveyList extends Component {
 		this.props.fetchSurveys()
 	}
 
-	deleteSurvey(e, id) {
-		e.preventDefault()
-		console.log(this.props.deleteSurvey)
-		this.props.deleteSurvey(id)
-	}
-
 	renderSurveys() {
+		console.log(this.props.surveys)
 		return this.props.surveys.reverse().map(survey => {
 			return (
 				<div className='card darken-1 blue-grey' key={survey._id}>
@@ -29,7 +24,7 @@ class SurveyList extends Component {
 						<a>Yes: {survey.yes}</a>
 						<a>No: {survey.no}</a>
 						<button
-							onClick={e => this.deleteSurvey(e, survey._id)}
+							onClick={() => this.props.deleteSurvey(survey._id)}
 							className='btn btn-danger'
 						>
 							Delete Survey

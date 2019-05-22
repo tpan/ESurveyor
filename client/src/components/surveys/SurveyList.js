@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { fetchSurveys, deleteSurvey } from '../../actions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchSurveys, deleteSurvey } from '../../actions';
 
 class SurveyList extends Component {
 	componentDidMount() {
-		this.props.fetchSurveys()
+		this.props.fetchSurveys();
 	}
 
 	renderSurveys() {
-		console.log(this.props.surveys)
 		return this.props.surveys.reverse().map(survey => {
 			return (
 				<div className='card darken-1 blue-grey' key={survey._id}>
@@ -31,19 +30,19 @@ class SurveyList extends Component {
 						</button>
 					</div>
 				</div>
-			)
-		})
+			);
+		});
 	}
 	render() {
-		return <div>{this.renderSurveys()}</div>
+		return <div>{this.renderSurveys()}</div>;
 	}
 }
 
 function mapStateToProps({ surveys }) {
-	return { surveys }
+	return { surveys };
 }
 
 export default connect(
 	mapStateToProps,
 	{ fetchSurveys, deleteSurvey },
-)(SurveyList)
+)(SurveyList);

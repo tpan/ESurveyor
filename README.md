@@ -13,4 +13,4 @@ In development we start the express server and the react server using:
 npm run dev
 ```
 
-Which will refresh on file changes.
+Which will watch for and refresh on file changes.

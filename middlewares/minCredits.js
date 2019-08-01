@@ -4,6 +4,5 @@ module.exports = (req, res, next) => {
 			.status(403)
 			.send({ error: 'Please add credits to your balance' });
 	}
-	//You have passed the test, continue the req
 	next();
 };
